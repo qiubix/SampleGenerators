@@ -1,6 +1,6 @@
 #include <gmock/gmock.h>
 using ::testing::Eq;
-#include <gtest/gtest.h>
+using ::testing::NotNull;
 using ::testing::Test;
 
 #include "../src/Components/SampleGenerator/SampleGenerator.hpp"
@@ -21,4 +21,11 @@ TEST_F(SampleGeneratorTest, shouldInitializeHandlers) {
   generator.prepareInterface();
 
   ASSERT_THAT(generator.listHandlers(), Eq("onLoadImage\n"));
+}
+
+TEST_F(SampleGeneratorTest, shouldInitializeStreams) {
+  SampleGenerator generator("generator");
+  generator.prepareInterface();
+
+  ASSERT_THAT(generator.getStream("out_img"), NotNull());
 }

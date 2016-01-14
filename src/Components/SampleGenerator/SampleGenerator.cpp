@@ -25,7 +25,7 @@ SampleGenerator::~SampleGenerator() {
 void SampleGenerator::prepareInterface() {
   LOG(LTRACE) << "SampleGenerator::prepareInterface\n";
   //registerStream("in_cloud", &in_cloud);
-//  registerStream("out_img", &out_img);
+  registerStream("out_img", &out_img);
   registerHandler("onLoadImage", boost::bind(&SampleGenerator::onLoadImage, this));
   addDependency("onLoadImage", NULL);
 }

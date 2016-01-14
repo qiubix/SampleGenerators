@@ -14,6 +14,8 @@
 #include "DataStream.hpp"
 #include "Property.hpp"
 
+#include <opencv2/core/core.hpp>
+
 namespace Generators {
 namespace Sample {
 
@@ -35,6 +37,7 @@ protected:
   /// Input data stream
 
   /// Output data stream
+  Base::DataStreamOut<cv::Mat> out_img;
 
   bool onInit();
   bool onFinish();
