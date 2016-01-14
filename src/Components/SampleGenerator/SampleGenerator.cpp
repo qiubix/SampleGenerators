@@ -91,6 +91,8 @@ void SampleGenerator::onLoadImage() {
     CLOG(LWARNING) << name() << ": image reading failed! [" << files[0] << "]";
   }
 
+  out_img.write(img);
+
 }
 
 string SampleGenerator::getFileExtension(const string & fileName) const {
