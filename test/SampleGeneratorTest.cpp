@@ -15,3 +15,10 @@ TEST_F(SampleGeneratorTest, shouldCreateSampleGeneratorComponent) {
 
   ASSERT_THAT(generator.name(), Eq("generator"));
 }
+
+TEST_F(SampleGeneratorTest, shouldInitializeHandlers) {
+  SampleGenerator generator("generator");
+  generator.prepareInterface();
+
+  ASSERT_THAT(generator.listHandlers(), Eq("onLoadImage\n"));
+}

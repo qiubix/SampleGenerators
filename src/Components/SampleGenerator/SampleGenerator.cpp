@@ -25,9 +25,9 @@ SampleGenerator::~SampleGenerator() {
 void SampleGenerator::prepareInterface() {
   LOG(LTRACE) << "SampleGenerator::prepareInterface\n";
   //registerStream("in_cloud", &in_cloud);
-  //registerStream("out_octree", &out_octree);
-  //registerHandler("onNewCloud", boost::bind(&SampleGenerator::onNewCloud, this));
-  //addDependency("onNewCloud", &in_cloud);
+//  registerStream("out_img", &out_img);
+  registerHandler("onLoadImage", boost::bind(&SampleGenerator::onLoadImage, this));
+  addDependency("onLoadImage", NULL);
 }
 
 bool SampleGenerator::onInit() {
@@ -48,6 +48,11 @@ bool SampleGenerator::onStop() {
 bool SampleGenerator::onStart() {
   LOG(LTRACE) << "SampleGenerator::onStart\n";
   return true;
+}
+
+void SampleGenerator::onLoadImage() {
+  LOG(LTRACE) << "SampleGenerator::onLoadImage\n";
+
 }
 
 }//: namespace Sample

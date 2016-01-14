@@ -19,7 +19,7 @@ namespace Sample {
 
 /*!
  * \class SampleGenerator
- * \brief Component for building octree from point cloud
+ * \brief
  * \author Karol Katerżawa
  */
 class SampleGenerator: public Base::Component
@@ -44,6 +44,7 @@ protected:
   /*!
    * Event handler function.
    */
+  void onLoadImage();
 
 };
 
