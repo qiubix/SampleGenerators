@@ -72,6 +72,7 @@ private:
 
   cv::Mat img;
 
+  string getFileExtension(const string &fileName) const;
 };
 
 }//: namespace Sample

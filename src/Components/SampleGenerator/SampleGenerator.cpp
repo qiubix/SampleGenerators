@@ -84,13 +84,17 @@ void SampleGenerator::onLoadImage() {
   findFiles();
 
   try {
-    std::string ext = files[0].substr(files[0].rfind(".")+1);
+    string ext = getFileExtension(files[0]);
     CLOG(LDEBUG) << "Extracted file Extension " << ext;
     img = cv::imread(files[0], CV_LOAD_IMAGE_ANYDEPTH | CV_LOAD_IMAGE_ANYCOLOR);
   } catch (...) {
     CLOG(LWARNING) << name() << ": image reading failed! [" << files[0] << "]";
   }
 
+}
+
+string SampleGenerator::getFileExtension(const string & fileName) const {
+  return fileName.substr(fileName.rfind(".") + 1);
 }
 
 }//: namespace Sample
