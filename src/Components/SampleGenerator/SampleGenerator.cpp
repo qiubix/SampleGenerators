@@ -6,6 +6,7 @@
 #include <memory>
 #include <string>
 #include <iostream>
+#include <opencv2/highgui/highgui.hpp>
 
 #include "SampleGenerator.hpp"
 
@@ -79,6 +80,16 @@ bool SampleGenerator::onStart() {
 
 void SampleGenerator::onLoadImage() {
   LOG(LTRACE) << "SampleGenerator::onLoadImage\n";
+
+  findFiles();
+
+  try {
+    std::string ext = files[0].substr(files[0].rfind(".")+1);
+    CLOG(LDEBUG) << "Extracted file Extension " << ext;
+    img = cv::imread(files[0], CV_LOAD_IMAGE_ANYDEPTH | CV_LOAD_IMAGE_ANYCOLOR);
+  } catch (...) {
+    CLOG(LWARNING) << name() << ": image reading failed! [" << files[0] << "]";
+  }
 
 }
 

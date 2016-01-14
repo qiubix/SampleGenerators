@@ -60,6 +60,7 @@ TEST_F(SampleGeneratorTest, shouldSetNewPropertyValue) {
 
 TEST_F(SampleGeneratorTest, shouldReturnFalseWhenNoFilesFound) {
   SampleGenerator generator("generator");
+  generator.setPropertyValue("sequence.pattern", "notexisting\\.file");
 
   ASSERT_THAT(generator.findFiles(), Eq(false));
 }
@@ -74,10 +75,31 @@ TEST_F(SampleGeneratorTest, shouldReturnTrueWhenFileIsFound) {
 TEST_F(SampleGeneratorTest, shouldSaveFileNameToFilesOnSearch) {
   SampleGenerator generator("generator");
   generator.setPropertyValue("sequence.pattern", ".*\\.testfile");
+
   generator.findFiles();
 
   vector<string> files = generator.getFiles();
   ASSERT_THAT(files, testing::SizeIs(2));
   ASSERT_THAT(files, testing::Contains("./first.testfile"));
   ASSERT_THAT(files, testing::Contains("./second.testfile"));
+}
+
+TEST_F(SampleGeneratorTest, shouldFindFilesAutomaticallyOnLoadImage) {
+  SampleGenerator generator("generator");
+
+  generator.onLoadImage();
+
+  vector<string> files = generator.getFiles();
+  ASSERT_THAT(files, testing::SizeIs(1));
+  ASSERT_THAT(files, testing::Contains("./43074.jpg"));
+}
+
+TEST_F(SampleGeneratorTest, shouldSaveLoadedImageToCvMat) {
+  SampleGenerator generator("generator");
+
+  generator.onLoadImage();
+
+  cv::Mat img = generator.getImg();
+  ASSERT_THAT(img.rows, Eq(321));
+  ASSERT_THAT(img.cols, Eq(481));
 }

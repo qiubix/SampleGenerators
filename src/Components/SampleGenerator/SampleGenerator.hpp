@@ -40,6 +40,15 @@ public:
     return files;
   }
 
+  const cv::Mat &getImg() const {
+    return img;
+  }
+
+  /*!
+   * Event handler function.
+   */
+  void onLoadImage();
+
 protected:
 
   /// Input data stream
@@ -52,11 +61,6 @@ protected:
   bool onStart();
   bool onStop();
 
-  /*!
-   * Event handler function.
-   */
-  void onLoadImage();
-
 private:
   /// Directory containing the images sequence.
   Base::Property<std::string> prop_directory;
@@ -65,6 +69,8 @@ private:
   Base::Property<std::string> prop_pattern;
 
   std::vector<std::string> files;
+
+  cv::Mat img;
 
 };
 
