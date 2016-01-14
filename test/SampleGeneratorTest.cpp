@@ -66,7 +66,18 @@ TEST_F(SampleGeneratorTest, shouldReturnFalseWhenNoFilesFound) {
 
 TEST_F(SampleGeneratorTest, shouldReturnTrueWhenFileIsFound) {
   SampleGenerator generator("generator");
-  generator.setPropertyValue("sequence.pattern", "test\\.file");
+  generator.setPropertyValue("sequence.pattern", "first\\.testfile");
 
   ASSERT_THAT(generator.findFiles(), Eq(true));
+}
+
+TEST_F(SampleGeneratorTest, shouldSaveFileNameToFilesOnSearch) {
+  SampleGenerator generator("generator");
+  generator.setPropertyValue("sequence.pattern", ".*\\.testfile");
+  generator.findFiles();
+
+  vector<string> files = generator.getFiles();
+  ASSERT_THAT(files, testing::SizeIs(2));
+  ASSERT_THAT(files, testing::Contains("./first.testfile"));
+  ASSERT_THAT(files, testing::Contains("./second.testfile"));
 }

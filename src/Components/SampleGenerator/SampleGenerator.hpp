@@ -36,6 +36,10 @@ public:
 
   void setPropertyValue(const std::string & propertyName, const std::string & newValue);
 
+  const vector<string> & getFiles() const {
+    return files;
+  }
+
 protected:
 
   /// Input data stream
