@@ -30,3 +30,6 @@
 # build directories
 dist/
 ext/
+
+# IntelliJ files
+.idea/
