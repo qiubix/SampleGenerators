@@ -36,6 +36,27 @@ void SampleGenerator::prepareInterface() {
   addDependency("onLoadImage", NULL);
 }
 
+bool SampleGenerator::findFiles() {
+  files.clear();
+
+  files = Utils::searchFiles(prop_directory, prop_pattern);
+
+  LOG(LINFO) << "Sequence loaded.";
+  BOOST_FOREACH(std::string fname, files)
+    LOG(LINFO) << fname;
+
+  return !files.empty();
+}
+
+void SampleGenerator::setPropertyValue(const std::string &propertyName, const std::string &newValue) {
+  if (propertyName == prop_directory.name()) {
+    prop_directory = newValue;
+  }
+  else {
+    prop_pattern = newValue;
+  }
+}
+
 bool SampleGenerator::onInit() {
   LOG(LTRACE) << "SampleGenerator::initialize\n";
   return true;

@@ -32,6 +32,10 @@ public:
 
   void prepareInterface();
 
+  bool findFiles();
+
+  void setPropertyValue(const std::string & propertyName, const std::string & newValue);
+
 protected:
 
   /// Input data stream
@@ -55,6 +59,8 @@ private:
 
   /// Files pattern (regular expression).
   Base::Property<std::string> prop_pattern;
+
+  std::vector<std::string> files;
 
 };
 

@@ -34,6 +34,7 @@ TEST_F(SampleGeneratorTest, shouldInitializeProperties) {
   SampleGenerator generator("generator");
 
   ASSERT_THAT(generator.listProperties(), Eq("sequence.directory\nsequence.pattern\n"));
+  ASSERT_THAT(generator.getAllProperties(), testing::SizeIs(2));
 //  generator.getProperty("sequence.directory")->retrieve(directoryValue);
   Base::Property<string>* directoryProperty = dynamic_cast<Base::Property<string>* > (generator.getProperty("sequence.directory"));
 //  ASSERT_THAT(directoryProperty.retrieve(), Eq("."));
@@ -45,4 +46,27 @@ TEST_F(SampleGeneratorTest, shouldInitializeProperties) {
   ASSERT_THAT(patternValue, Eq(".*\\.(jpg|png|bmp|yaml|yml)"));
 //  ASSERT_THAT((*generator.getProperty("sequence.directory"))(), Eq("."));
 //  ASSERT_THAT(generator.getProperty("sequence.pattern")->retrieve(), Eq(".*\\.(jpg|png|bmp|yaml|yml)"));
+}
+
+TEST_F(SampleGeneratorTest, shouldSetNewPropertyValue) {
+  SampleGenerator generator("generator");
+
+  generator.setPropertyValue("sequence.pattern", "new\\.value");
+
+  Base::Property<string>* patternProperty = dynamic_cast<Base::Property<string>* > (generator.getProperty("sequence.pattern"));
+  string patternValue = *patternProperty;
+  ASSERT_THAT(patternValue, Eq("new\\.value"));
+}
+
+TEST_F(SampleGeneratorTest, shouldReturnFalseWhenNoFilesFound) {
+  SampleGenerator generator("generator");
+
+  ASSERT_THAT(generator.findFiles(), Eq(false));
+}
+
+TEST_F(SampleGeneratorTest, shouldReturnTrueWhenFileIsFound) {
+  SampleGenerator generator("generator");
+  generator.setPropertyValue("sequence.pattern", "test\\.file");
+
+  ASSERT_THAT(generator.findFiles(), Eq(true));
 }
