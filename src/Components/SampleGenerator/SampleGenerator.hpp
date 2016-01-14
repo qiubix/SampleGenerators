@@ -49,6 +49,13 @@ protected:
    */
   void onLoadImage();
 
+private:
+  /// Directory containing the images sequence.
+  Base::Property<std::string> prop_directory;
+
+  /// Files pattern (regular expression).
+  Base::Property<std::string> prop_pattern;
+
 };
 
 }//: namespace Sample

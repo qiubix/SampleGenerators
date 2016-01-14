@@ -14,8 +14,14 @@
 namespace Generators {
 namespace Sample {
 
-SampleGenerator::SampleGenerator(const std::string & name) : Base::Component(name) {
+SampleGenerator::SampleGenerator(const std::string & name) :
+    Base::Component(name),
+    prop_directory("sequence.directory", std::string(".")),
+    prop_pattern("sequence.pattern", std::string(".*\\.(jpg|png|bmp|yaml|yml)"))
+{
   LOG(LTRACE)<<"Hello SampleGenerator\n";
+  registerProperty(prop_directory);
+  registerProperty(prop_pattern);
 }
 
 SampleGenerator::~SampleGenerator() {
