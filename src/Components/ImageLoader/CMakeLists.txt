@@ -11,7 +11,7 @@ SET(GCC_COVERAGE_COMPILE_FLAGS "-fprofile-arcs -ftest-coverage")
 SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )
 
 # Create an executable file from sources:
-add_library(SampleGenerator SHARED ${files})
-target_link_libraries(SampleGenerator ${OpenCV_LIBS} ${DisCODe_LIBRARIES} ${Boost_LIBRARIES})
+add_library(ImageLoader SHARED ${files})
+target_link_libraries(ImageLoader ${OpenCV_LIBS} ${DisCODe_LIBRARIES} ${Boost_LIBRARIES})
 
-INSTALL_COMPONENT(SampleGenerator)
+INSTALL_COMPONENT(ImageLoader)

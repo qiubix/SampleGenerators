@@ -1,10 +1,10 @@
 /*!
- * \file SampleGenerator.hpp
+ * \file ImageLoader.hpp
  * \brief
  */
 
-#ifndef OCTREE_BUILDER_HPP_
-#define OCTREE_BUILDER_HPP_
+#ifndef IMAGE_LOADER_HPP_
+#define IMAGE_LOADER_HPP_
 
 #define CV_NO_BACKWARD_COMPATIBILITY
 
@@ -20,15 +20,15 @@ namespace Generators {
 namespace Sample {
 
 /*!
- * \class SampleGenerator
+ * \class ImageLoader
  * \brief
  * \author Karol Katerżawa
  */
-class SampleGenerator: public Base::Component
+class ImageLoader: public Base::Component
 {
 public:
-  SampleGenerator(const std::string & name = "SampleGenerator");
-  virtual ~SampleGenerator();
+  ImageLoader(const std::string & name = "ImageLoader");
+  virtual ~ImageLoader();
 
   void prepareInterface();
 
@@ -82,7 +82,7 @@ private:
 /*
  * Register processor component.
  */
-REGISTER_COMPONENT("SampleGenerator", Generators::Sample::SampleGenerator)
+REGISTER_COMPONENT("ImageLoader", Generators::Sample::ImageLoader)
 
-#endif /* OCTREE_BUILDER_HPP_ */
+#endif /* IMAGE_LOADER_HPP_ */
 
