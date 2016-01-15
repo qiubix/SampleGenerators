@@ -18,11 +18,13 @@ namespace Sample {
 CvMatGenerator::CvMatGenerator(const std::string & name) :
     Base::Component(name),
     property_width("matrix.width", 4),
-    property_height("matrix.height", 3)
+    property_height("matrix.height", 3),
+    property_value("matrix.value", 1)
 {
   LOG(LTRACE)<<"Hello CvMatGenerator\n";
   registerProperty(property_width);
   registerProperty(property_height);
+  registerProperty(property_value);
 }
 
 CvMatGenerator::~CvMatGenerator() {
@@ -37,8 +39,10 @@ void CvMatGenerator::prepareInterface() {
 void CvMatGenerator::setPropertyValue(const string &propertyName, const int newValue) {
   if (property_width.name() == propertyName) {
     property_width(newValue);
-  } else {
+  } else if (property_height.name() == propertyName){
     property_height(newValue);
+  } else {
+    property_value(newValue);
   }
 }
 
@@ -59,7 +63,8 @@ bool CvMatGenerator::onStop() {
 
 bool CvMatGenerator::onStart() {
   LOG(LTRACE) << "CvMatGenerator::onStart\n";
-  img.create(property_height, property_width, CV_64F);
+  img = cv::Mat::ones(property_height,property_width, CV_32S);
+  img = img * property_value;
   return true;
 }
 

@@ -52,6 +52,7 @@ protected:
 private:
   Base::Property<int> property_width;
   Base::Property<int> property_height;
+  Base::Property<int> property_value;
   cv::Mat img;
 };
 
