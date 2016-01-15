@@ -44,11 +44,18 @@ TEST_F(ImageLoaderTest, shouldInitializeProperties) {
 }
 
 TEST_F(ImageLoaderTest, shouldSetNewPropertyValue) {
-  generator.setPropertyValue("sequence.pattern", "new\\.value");
+  const string PATTERN = "new\\.value";
+  const string DIRECTORY = "another\\.dir-value";
+  generator.setPropertyValue("sequence.pattern", PATTERN);
+  generator.setPropertyValue("sequence.directory", DIRECTORY);
 
   StringProperty* patternProperty = dynamic_cast<StringProperty* > (generator.getProperty("sequence.pattern"));
   string patternValue = *patternProperty;
-  ASSERT_THAT(patternValue, Eq("new\\.value"));
+  ASSERT_THAT(patternValue, Eq(PATTERN));
+
+  StringProperty* directoryProperty = dynamic_cast<StringProperty* > (generator.getProperty("sequence.directory"));
+  string directoryValue = *directoryProperty;
+  ASSERT_THAT(directoryValue, Eq(DIRECTORY));
 }
 
 TEST_F(ImageLoaderTest, shouldReturnFalseWhenNoFilesFound) {
