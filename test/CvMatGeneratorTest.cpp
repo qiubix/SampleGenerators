@@ -50,3 +50,11 @@ TEST_F(CvMatGeneratorTest, shouldSetNewPropertyValue) {
   int heightValue = getIntPropertyValue("matrix.height");
   EXPECT_THAT(heightValue, Eq(13));
 }
+
+TEST_F(CvMatGeneratorTest, shouldCreateMatrixWithSpecificDimentionsOnStart) {
+  generator.onStart();
+
+  cv::Mat matrix = generator.getImg();
+  EXPECT_THAT(matrix.rows, Eq(3));
+  EXPECT_THAT(matrix.cols, Eq(4));
+}

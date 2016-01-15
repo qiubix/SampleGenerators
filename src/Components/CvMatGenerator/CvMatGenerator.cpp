@@ -59,6 +59,7 @@ bool CvMatGenerator::onStop() {
 
 bool CvMatGenerator::onStart() {
   LOG(LTRACE) << "CvMatGenerator::onStart\n";
+  img.create(property_height, property_width, CV_64F);
   return true;
 }
 

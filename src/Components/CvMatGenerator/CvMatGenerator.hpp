@@ -34,6 +34,12 @@ public:
 
   void setPropertyValue(const string& propertyName, const int newValue);
 
+  const cv::Mat &getImg() const {
+    return img;
+  }
+
+  bool onStart();
+
 protected:
 
   /// Output data stream
@@ -41,12 +47,12 @@ protected:
 
   bool onInit();
   bool onFinish();
-  bool onStart();
   bool onStop();
 
 private:
   Base::Property<int> property_width;
   Base::Property<int> property_height;
+  cv::Mat img;
 };
 
 }//: namespace Sample
