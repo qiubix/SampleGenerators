@@ -32,13 +32,7 @@ public:
 
   void prepareInterface();
 
-  /*!
-   * Event handler function.
-   */
-
 protected:
-
-  /// Input data stream
 
   /// Output data stream
   Base::DataStreamOut<cv::Mat> out_img;
@@ -49,6 +43,8 @@ protected:
   bool onStop();
 
 private:
+  Base::Property<int> property_width;
+  Base::Property<int> property_height;
 };
 
 }//: namespace Sample

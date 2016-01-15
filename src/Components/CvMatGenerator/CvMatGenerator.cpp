@@ -15,8 +15,14 @@
 namespace Generators {
 namespace Sample {
 
-CvMatGenerator::CvMatGenerator(const std::string & name) : Base::Component(name) {
+CvMatGenerator::CvMatGenerator(const std::string & name) :
+    Base::Component(name),
+    property_width("mat.width", 4),
+    property_height("mat.height", 3)
+{
   LOG(LTRACE)<<"Hello CvMatGenerator\n";
+  registerProperty(property_width);
+  registerProperty(property_height);
 }
 
 CvMatGenerator::~CvMatGenerator() {
