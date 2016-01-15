@@ -1,0 +1,45 @@
+<Task>
+  <!-- task definition -->
+  <Subtasks>
+    <Subtask name="Main">
+      <Executor name="Processing"  period="1">
+        <Component name="Sequence1" type="SampleGenerators:SampleGenerator" priority="1" bump="0">
+          <param name="sequence.directory">%[TASK_LOCATION]%/../data/</param>
+          <param name="sequence.pattern">295087.jpg</param>
+          <!-- <param name="mode.loop">1</param> -->
+        </Component>
+        <Component name="Sequence2" type="SampleGenerators:SampleGenerator" priority="1" bump="0">
+          <param name="sequence.directory">%[TASK_LOCATION]%/../data/</param>
+          <param name="sequence.pattern">43074.jpg</param>
+          <!-- <param name="mode.loop">1</param> -->
+        </Component>
+        <Component name="Sum" type="CvBasic:Sum" priority="1" bump="0">
+        </Component>
+      </Executor>
+      <Executor name="Visualization" period="0.2">
+        <Component name="Window" type="CvBasic:CvWindow" priority="1" bump="0">
+          <param name="count">1</param>
+          <param name="title">Window</param>
+        </Component>
+      </Executor>
+    </Subtask>
+
+  </Subtasks>
+
+  <!-- pipes connecting datastreams -->
+  <DataStreams>
+    <Source name="Sequence1.out_img">
+      <sink>Sum.in_img1</sink>
+    </Source>
+    <Source name="Sequence2.out_img">
+      <sink>Sum.in_img2</sink>
+    </Source>
+    <Source name="Sum.out_img">
+      <sink>Window.in_img</sink>
+    </Source>
+  </DataStreams>
+</Task>
+
+
+
+
