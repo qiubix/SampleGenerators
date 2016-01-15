@@ -3,35 +3,35 @@ using ::testing::Eq;
 using ::testing::NotNull;
 using ::testing::Test;
 
-#include "../src/Components/SampleGenerator/SampleGenerator.hpp"
+#include "../src/Components/ImageLoader/ImageLoader.hpp"
 
-using Generators::Sample::SampleGenerator;
+using Generators::Sample::ImageLoader;
 
-class SampleGeneratorTest : public Test {
+class ImageLoaderTest : public Test {
 };
 
-TEST_F(SampleGeneratorTest, shouldCreateSampleGeneratorComponent) {
-  SampleGenerator generator("generator");
+TEST_F(ImageLoaderTest, shouldCreateImageLoaderComponent) {
+  ImageLoader generator("generator");
 
   ASSERT_THAT(generator.name(), Eq("generator"));
 }
 
-TEST_F(SampleGeneratorTest, shouldInitializeHandlers) {
-  SampleGenerator generator("generator");
+TEST_F(ImageLoaderTest, shouldInitializeHandlers) {
+  ImageLoader generator("generator");
   generator.prepareInterface();
 
   ASSERT_THAT(generator.listHandlers(), Eq("onLoadImage\n"));
 }
 
-TEST_F(SampleGeneratorTest, shouldInitializeStreams) {
-  SampleGenerator generator("generator");
+TEST_F(ImageLoaderTest, shouldInitializeStreams) {
+  ImageLoader generator("generator");
   generator.prepareInterface();
 
   ASSERT_THAT(generator.getStream("out_img"), NotNull());
 }
 
-TEST_F(SampleGeneratorTest, shouldInitializeProperties) {
-  SampleGenerator generator("generator");
+TEST_F(ImageLoaderTest, shouldInitializeProperties) {
+  ImageLoader generator("generator");
 
   ASSERT_THAT(generator.listProperties(), Eq("sequence.directory\nsequence.pattern\n"));
   ASSERT_THAT(generator.getAllProperties(), testing::SizeIs(2));
@@ -48,8 +48,8 @@ TEST_F(SampleGeneratorTest, shouldInitializeProperties) {
 //  ASSERT_THAT(generator.getProperty("sequence.pattern")->retrieve(), Eq(".*\\.(jpg|png|bmp|yaml|yml)"));
 }
 
-TEST_F(SampleGeneratorTest, shouldSetNewPropertyValue) {
-  SampleGenerator generator("generator");
+TEST_F(ImageLoaderTest, shouldSetNewPropertyValue) {
+  ImageLoader generator("generator");
 
   generator.setPropertyValue("sequence.pattern", "new\\.value");
 
@@ -58,22 +58,22 @@ TEST_F(SampleGeneratorTest, shouldSetNewPropertyValue) {
   ASSERT_THAT(patternValue, Eq("new\\.value"));
 }
 
-TEST_F(SampleGeneratorTest, shouldReturnFalseWhenNoFilesFound) {
-  SampleGenerator generator("generator");
+TEST_F(ImageLoaderTest, shouldReturnFalseWhenNoFilesFound) {
+  ImageLoader generator("generator");
   generator.setPropertyValue("sequence.pattern", "notexisting\\.file");
 
   ASSERT_THAT(generator.findFiles(), Eq(false));
 }
 
-TEST_F(SampleGeneratorTest, shouldReturnTrueWhenFileIsFound) {
-  SampleGenerator generator("generator");
+TEST_F(ImageLoaderTest, shouldReturnTrueWhenFileIsFound) {
+  ImageLoader generator("generator");
   generator.setPropertyValue("sequence.pattern", "first\\.testfile");
 
   ASSERT_THAT(generator.findFiles(), Eq(true));
 }
 
-TEST_F(SampleGeneratorTest, shouldSaveFileNameToFilesOnSearch) {
-  SampleGenerator generator("generator");
+TEST_F(ImageLoaderTest, shouldSaveFileNameToFilesOnSearch) {
+  ImageLoader generator("generator");
   generator.setPropertyValue("sequence.pattern", ".*\\.testfile");
 
   generator.findFiles();
@@ -84,8 +84,8 @@ TEST_F(SampleGeneratorTest, shouldSaveFileNameToFilesOnSearch) {
   ASSERT_THAT(files, testing::Contains("./second.testfile"));
 }
 
-TEST_F(SampleGeneratorTest, shouldFindFilesAutomaticallyOnLoadImage) {
-  SampleGenerator generator("generator");
+TEST_F(ImageLoaderTest, shouldFindFilesAutomaticallyOnLoadImage) {
+  ImageLoader generator("generator");
 
   generator.onLoadImage();
 
@@ -94,8 +94,8 @@ TEST_F(SampleGeneratorTest, shouldFindFilesAutomaticallyOnLoadImage) {
   ASSERT_THAT(files, testing::Contains("./43074.jpg"));
 }
 
-TEST_F(SampleGeneratorTest, shouldSaveLoadedImageToCvMat) {
-  SampleGenerator generator("generator");
+TEST_F(ImageLoaderTest, shouldSaveLoadedImageToCvMat) {
+  ImageLoader generator("generator");
 
   generator.onLoadImage();
 
