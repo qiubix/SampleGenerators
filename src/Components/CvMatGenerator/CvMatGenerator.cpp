@@ -17,8 +17,8 @@ namespace Sample {
 
 CvMatGenerator::CvMatGenerator(const std::string & name) :
     Base::Component(name),
-    property_width("mat.width", 4),
-    property_height("mat.height", 3)
+    property_width("matrix.width", 4),
+    property_height("matrix.height", 3)
 {
   LOG(LTRACE)<<"Hello CvMatGenerator\n";
   registerProperty(property_width);

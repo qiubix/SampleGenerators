@@ -8,8 +8,14 @@ using namespace testing;
 class CvMatGeneratorTest : public Test {
 public:
   CvMatGenerator generator;
-//  typedef Base::Property<string> StringProperty;
+
   typedef Base::Property<int> IntProperty;
+
+  int getIntPropertyValue(const string & propertyName) {
+    IntProperty* property = dynamic_cast<IntProperty* > (generator.getProperty(propertyName));
+    int propertyValue = *property;
+    return propertyValue;
+  }
 };
 
 TEST_F(CvMatGeneratorTest, shouldCreateCvMatGeneratorComponent) {
@@ -23,15 +29,13 @@ TEST_F(CvMatGeneratorTest, shouldInitializeStreams) {
 }
 
 TEST_F(CvMatGeneratorTest, shouldSetDefaultPropertiesOnInit) {
-  EXPECT_THAT(generator.listProperties(), HasSubstr("mat.width"));
-  EXPECT_THAT(generator.listProperties(), HasSubstr("mat.height"));
+  EXPECT_THAT(generator.listProperties(), HasSubstr("matrix.width"));
+  EXPECT_THAT(generator.listProperties(), HasSubstr("matrix.height"));
   EXPECT_THAT(generator.getAllProperties(), SizeIs(2));
 
-  IntProperty* widthProperty = dynamic_cast<IntProperty* > (generator.getProperty("mat.width"));
-  int widthValue = *widthProperty;
+  int widthValue = getIntPropertyValue("matrix.width");
   EXPECT_THAT(widthValue, Eq(4));
 
-  IntProperty* heightProperty = dynamic_cast<IntProperty* > (generator.getProperty("mat.height"));
-  int heightValue = *heightProperty;
+  int heightValue = getIntPropertyValue("matrix.height");
   EXPECT_THAT(heightValue, Eq(3));
 }
