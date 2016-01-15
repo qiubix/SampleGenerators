@@ -32,6 +32,8 @@ public:
 
   void prepareInterface();
 
+  void setPropertyValue(const string& propertyName, const int newValue);
+
 protected:
 
   /// Output data stream

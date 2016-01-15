@@ -34,6 +34,14 @@ void CvMatGenerator::prepareInterface() {
   registerStream("out_img", &out_img);
 }
 
+void CvMatGenerator::setPropertyValue(const string &propertyName, const int newValue) {
+  if (property_width.name() == propertyName) {
+    property_width(newValue);
+  } else {
+    property_height(newValue);
+  }
+}
+
 bool CvMatGenerator::onInit() {
   LOG(LTRACE) << "CvMatGenerator::initialize\n";
   return true;

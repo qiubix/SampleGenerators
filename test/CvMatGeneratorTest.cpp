@@ -39,3 +39,14 @@ TEST_F(CvMatGeneratorTest, shouldSetDefaultPropertiesOnInit) {
   int heightValue = getIntPropertyValue("matrix.height");
   EXPECT_THAT(heightValue, Eq(3));
 }
+
+TEST_F(CvMatGeneratorTest, shouldSetNewPropertyValue) {
+  generator.setPropertyValue("matrix.width", 9);
+  generator.setPropertyValue("matrix.height", 13);
+
+  int widthValue = getIntPropertyValue("matrix.width");
+  EXPECT_THAT(widthValue, Eq(9));
+
+  int heightValue = getIntPropertyValue("matrix.height");
+  EXPECT_THAT(heightValue, Eq(13));
+}
