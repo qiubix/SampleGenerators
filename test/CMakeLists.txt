@@ -20,3 +20,7 @@ file(COPY second.testfile DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 file(COPY second.testfile DESTINATION ${CMAKE_BINARY_DIR}/Debug)
 file(COPY ../data/43074.jpg DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 file(COPY ../data/43074.jpg DESTINATION ${CMAKE_BINARY_DIR}/Debug)
+
+set(CV_MAT_GENERATOR_SRC CvMatGeneratorTest.cpp)
+set(CV_MAT_GENERATOR_LIB CvMatGenerator)
+create_test(CvMatGeneratorTest ${CV_MAT_GENERATOR_SRC} "${CV_MAT_GENERATOR_LIB}")
