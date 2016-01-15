@@ -8,30 +8,27 @@ using ::testing::Test;
 using Generators::Sample::ImageLoader;
 
 class ImageLoaderTest : public Test {
+public:
+  ImageLoader generator;
 };
 
 TEST_F(ImageLoaderTest, shouldCreateImageLoaderComponent) {
-  ImageLoader generator("generator");
-
-  ASSERT_THAT(generator.name(), Eq("generator"));
+  ASSERT_THAT(generator.name(), Eq("ImageLoader"));
 }
 
 TEST_F(ImageLoaderTest, shouldInitializeHandlers) {
-  ImageLoader generator("generator");
   generator.prepareInterface();
 
   ASSERT_THAT(generator.listHandlers(), Eq("onLoadImage\n"));
 }
 
 TEST_F(ImageLoaderTest, shouldInitializeStreams) {
-  ImageLoader generator("generator");
   generator.prepareInterface();
 
   ASSERT_THAT(generator.getStream("out_img"), NotNull());
 }
 
 TEST_F(ImageLoaderTest, shouldInitializeProperties) {
-  ImageLoader generator("generator");
 
   ASSERT_THAT(generator.listProperties(), Eq("sequence.directory\nsequence.pattern\n"));
   ASSERT_THAT(generator.getAllProperties(), testing::SizeIs(2));
@@ -48,8 +45,6 @@ TEST_F(ImageLoaderTest, shouldInitializeProperties) {
 }
 
 TEST_F(ImageLoaderTest, shouldSetNewPropertyValue) {
-  ImageLoader generator("generator");
-
   generator.setPropertyValue("sequence.pattern", "new\\.value");
 
   Base::Property<string>* patternProperty =
@@ -59,21 +54,18 @@ TEST_F(ImageLoaderTest, shouldSetNewPropertyValue) {
 }
 
 TEST_F(ImageLoaderTest, shouldReturnFalseWhenNoFilesFound) {
-  ImageLoader generator("generator");
   generator.setPropertyValue("sequence.pattern", "notexisting\\.file");
 
   ASSERT_THAT(generator.findFiles(), Eq(false));
 }
 
 TEST_F(ImageLoaderTest, shouldReturnTrueWhenFileIsFound) {
-  ImageLoader generator("generator");
   generator.setPropertyValue("sequence.pattern", "first\\.testfile");
 
   ASSERT_THAT(generator.findFiles(), Eq(true));
 }
 
 TEST_F(ImageLoaderTest, shouldSaveFileNameToFilesOnSearch) {
-  ImageLoader generator("generator");
   generator.setPropertyValue("sequence.pattern", ".*\\.testfile");
 
   generator.findFiles();
@@ -85,7 +77,6 @@ TEST_F(ImageLoaderTest, shouldSaveFileNameToFilesOnSearch) {
 }
 
 TEST_F(ImageLoaderTest, shouldFindFilesAutomaticallyOnLoadImage) {
-  ImageLoader generator("generator");
 
   generator.onLoadImage();
 
@@ -95,7 +86,6 @@ TEST_F(ImageLoaderTest, shouldFindFilesAutomaticallyOnLoadImage) {
 }
 
 TEST_F(ImageLoaderTest, shouldSaveLoadedImageToCvMat) {
-  ImageLoader generator("generator");
 
   generator.onLoadImage();
 
