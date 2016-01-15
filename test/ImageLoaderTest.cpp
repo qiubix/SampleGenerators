@@ -35,17 +35,16 @@ TEST_F(ImageLoaderTest, shouldInitializeProperties) {
 
   ASSERT_THAT(generator.listProperties(), Eq("sequence.directory\nsequence.pattern\n"));
   ASSERT_THAT(generator.getAllProperties(), testing::SizeIs(2));
-//  generator.getProperty("sequence.directory")->retrieve(directoryValue);
-  Base::Property<string>* directoryProperty = dynamic_cast<Base::Property<string>* > (generator.getProperty("sequence.directory"));
-//  ASSERT_THAT(directoryProperty.retrieve(), Eq("."));
-//  directoryProperty.retrieve(directoryValue);
+
+  Base::Property<string>* directoryProperty =
+      dynamic_cast<Base::Property<string>* > (generator.getProperty("sequence.directory"));
   string directoryValue = *directoryProperty;
   ASSERT_THAT(directoryValue, Eq("."));
-  Base::Property<string>* patternProperty = dynamic_cast<Base::Property<string>* > (generator.getProperty("sequence.pattern"));
+
+  Base::Property<string>* patternProperty =
+      dynamic_cast<Base::Property<string>* > (generator.getProperty("sequence.pattern"));
   string patternValue = *patternProperty;
   ASSERT_THAT(patternValue, Eq(".*\\.(jpg|png|bmp|yaml|yml)"));
-//  ASSERT_THAT((*generator.getProperty("sequence.directory"))(), Eq("."));
-//  ASSERT_THAT(generator.getProperty("sequence.pattern")->retrieve(), Eq(".*\\.(jpg|png|bmp|yaml|yml)"));
 }
 
 TEST_F(ImageLoaderTest, shouldSetNewPropertyValue) {
@@ -53,7 +52,8 @@ TEST_F(ImageLoaderTest, shouldSetNewPropertyValue) {
 
   generator.setPropertyValue("sequence.pattern", "new\\.value");
 
-  Base::Property<string>* patternProperty = dynamic_cast<Base::Property<string>* > (generator.getProperty("sequence.pattern"));
+  Base::Property<string>* patternProperty =
+      dynamic_cast<Base::Property<string>* > (generator.getProperty("sequence.pattern"));
   string patternValue = *patternProperty;
   ASSERT_THAT(patternValue, Eq("new\\.value"));
 }
