@@ -2,3 +2,5 @@
 ADD_COMPONENT(ImageLoader)
 
 ADD_COMPONENT(CvMatGenerator)
+
+ADD_COMPONENT(CvMatSink)
