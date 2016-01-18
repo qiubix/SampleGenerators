@@ -28,6 +28,8 @@ CvMatSink::~CvMatSink() {
 void CvMatSink::prepareInterface() {
   LOG(LTRACE) << "CvMatSink::prepareInterface\n";
   registerStream("in_img", &in_img);
+  registerHandler("onNewMat", boost::bind(&CvMatSink::onNewMat, this));
+  addDependency("onNewMat", &in_img);
 }
 
 bool CvMatSink::onInit() {
@@ -50,5 +52,8 @@ bool CvMatSink::onStart() {
   return true;
 }
 
+void CvMatSink::onNewMat() {
+
+}
 }//: namespace Sample
 }//: namespace Sinks

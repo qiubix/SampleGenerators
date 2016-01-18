@@ -36,6 +36,8 @@ public:
     return img;
   }
 
+  void onNewMat();
+
 protected:
 
   /// Input data stream
