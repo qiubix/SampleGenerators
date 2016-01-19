@@ -41,6 +41,7 @@ public:
   }
 
   void onNewMat();
+  void display();
 
 protected:
 

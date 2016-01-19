@@ -53,7 +53,13 @@ bool CvMatSink::onStart() {
 }
 
 void CvMatSink::onNewMat() {
+  img = in_img.read();
+  display();
+}
+
+void CvMatSink::display() {
   cout << img;
 }
+
 }//: namespace Sample
 }//: namespace Sinks
