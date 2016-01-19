@@ -33,3 +33,15 @@ TEST_F(CvMatSinkTest, shouldInitializeHandlers) {
 
   ASSERT_THAT(sink.getHandler("onNewMat"), NotNull());
 }
+
+TEST_F(CvMatSinkTest, shouldDisplayCvMatOnNewMat) {
+  cv::Mat img;
+  img = cv::Mat::ones(3, 4, CV_32S);
+  sink.setImg(img);
+
+  internal::CaptureStdout();
+  sink.onNewMat();
+
+  string output = internal::GetCapturedStdout();
+  ASSERT_THAT(output, Eq("[1, 1, 1, 1;\n  1, 1, 1, 1;\n  1, 1, 1, 1]"));
+}

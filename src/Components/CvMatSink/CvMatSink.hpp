@@ -36,6 +36,10 @@ public:
     return img;
   }
 
+  void setImg(const cv::Mat & img) {
+    this -> img = img;
+  }
+
   void onNewMat();
 
 protected:

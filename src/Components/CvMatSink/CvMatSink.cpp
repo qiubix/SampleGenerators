@@ -53,7 +53,7 @@ bool CvMatSink::onStart() {
 }
 
 void CvMatSink::onNewMat() {
-
+  cout << img;
 }
 }//: namespace Sample
 }//: namespace Sinks
