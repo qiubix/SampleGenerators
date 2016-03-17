@@ -58,7 +58,8 @@ void CvMatSink::onNewMat() {
 }
 
 void CvMatSink::display() {
-  cout << img;
+  cout << img << endl;
+  LOG(LWARNING) << "END OF SEQUENCE\n";
 }
 
 }//: namespace Sample

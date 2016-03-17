@@ -43,5 +43,5 @@ TEST_F(CvMatSinkTest, shouldDisplayCvMatOnNewMat) {
   sink.display();
 
   string output = internal::GetCapturedStdout();
-  ASSERT_THAT(output, Eq("[1, 1, 1, 1;\n  1, 1, 1, 1;\n  1, 1, 1, 1]"));
+  ASSERT_THAT(output, Eq("[1, 1, 1, 1;\n  1, 1, 1, 1;\n  1, 1, 1, 1]\n"));
 }
