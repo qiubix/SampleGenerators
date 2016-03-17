@@ -65,6 +65,7 @@ bool CvMatGenerator::onStart() {
   LOG(LTRACE) << "CvMatGenerator::onStart\n";
   img = cv::Mat::ones(property_height,property_width, CV_32S);
   img = img * property_value;
+  out_img.write(img);
   return true;
 }
 

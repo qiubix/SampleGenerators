@@ -24,3 +24,7 @@ file(COPY ../data/43074.jpg DESTINATION ${CMAKE_BINARY_DIR}/Debug)
 set(CV_MAT_GENERATOR_SRC CvMatGeneratorTest.cpp)
 set(CV_MAT_GENERATOR_LIB CvMatGenerator)
 create_test(CvMatGeneratorTest ${CV_MAT_GENERATOR_SRC} "${CV_MAT_GENERATOR_LIB}")
+
+set(CV_MAT_SINK_SRC CvMatSinkTest.cpp)
+set(CV_MAT_SINK_LIB CvMatSink)
+create_test(CvMatSinkTest ${CV_MAT_SINK_SRC} "${CV_MAT_SINK_LIB}")

@@ -11,6 +11,12 @@ class ImageLoaderTest : public Test {
 public:
   ImageLoader generator;
   typedef Base::Property<string> StringProperty;
+
+  string getStringPropertyValue(const string & propertyName) {
+    StringProperty* property = dynamic_cast<StringProperty* > (generator.getProperty(propertyName));
+    string propertyValue = *property;
+    return propertyValue;
+  }
 };
 
 TEST_F(ImageLoaderTest, shouldCreateImageLoaderComponent) {
@@ -34,12 +40,10 @@ TEST_F(ImageLoaderTest, shouldInitializeProperties) {
   ASSERT_THAT(generator.listProperties(), Eq("sequence.directory\nsequence.pattern\n"));
   ASSERT_THAT(generator.getAllProperties(), testing::SizeIs(2));
 
-  StringProperty* directoryProperty = dynamic_cast<StringProperty* > (generator.getProperty("sequence.directory"));
-  string directoryValue = *directoryProperty;
+  string directoryValue = getStringPropertyValue("sequence.directory");
   ASSERT_THAT(directoryValue, Eq("."));
 
-  StringProperty* patternProperty = dynamic_cast<StringProperty* > (generator.getProperty("sequence.pattern"));
-  string patternValue = *patternProperty;
+  string patternValue = getStringPropertyValue("sequence.pattern");
   ASSERT_THAT(patternValue, Eq(".*\\.(jpg|png|bmp|yaml|yml)"));
 }
 
@@ -49,12 +53,10 @@ TEST_F(ImageLoaderTest, shouldSetNewPropertyValue) {
   generator.setPropertyValue("sequence.pattern", PATTERN);
   generator.setPropertyValue("sequence.directory", DIRECTORY);
 
-  StringProperty* patternProperty = dynamic_cast<StringProperty* > (generator.getProperty("sequence.pattern"));
-  string patternValue = *patternProperty;
+  string patternValue = getStringPropertyValue("sequence.pattern");
   ASSERT_THAT(patternValue, Eq(PATTERN));
 
-  StringProperty* directoryProperty = dynamic_cast<StringProperty* > (generator.getProperty("sequence.directory"));
-  string directoryValue = *directoryProperty;
+  string directoryValue = getStringPropertyValue("sequence.directory");
   ASSERT_THAT(directoryValue, Eq(DIRECTORY));
 }
 

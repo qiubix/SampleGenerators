@@ -1,0 +1,42 @@
+<Task>
+  <!-- task definition -->
+  <Subtasks>
+    <Subtask name="Main">
+      <Executor name="Processing"  period="1">
+        <Component name="Sequence1" type="SampleGenerators:CvMatGenerator" priority="1" bump="0">
+          <!-- <param name="matrix.value">2</param> -->
+        </Component>
+        <Component name="Sequence2" type="SampleGenerators:CvMatGenerator" priority="1" bump="0">
+        </Component>
+        <Component name="Sum" type="CvBasic:Sum" priority="1" bump="0">
+        </Component>
+        <Component name="Sink" type="SampleGenerators:CvMatSink" priority="1" bump="0">
+        </Component>
+      </Executor>
+      <!-- <Executor name="Visualization" period="0.2">
+        <Component name="Window" type="CvBasic:CvWindow" priority="1" bump="0">
+          <param name="count">1</param>
+          <param name="title">Window</param>
+        </Component>
+      </Executor> -->
+    </Subtask>
+
+  </Subtasks>
+
+  <!-- pipes connecting datastreams -->
+  <DataStreams>
+    <Source name="Sequence1.out_img">
+      <sink>Sum.in_img1</sink>
+    </Source>
+    <Source name="Sequence2.out_img">
+      <sink>Sum.in_img2</sink>
+    </Source>
+    <Source name="Sum.out_img">
+      <sink>Sink.in_img</sink>
+    </Source>
+  </DataStreams>
+</Task>
+
+
+
+
