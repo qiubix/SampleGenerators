@@ -14,7 +14,12 @@ include(DisCODeMacros)
 # Testing
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
 include(GoogleMock)
+include(TestSuite)
 set(CMAKE_AUTOMOC ON)
+
+# Default build type
+include(DefaultBuildType)
+set_default_build_type(Debug)
 
 # Set default install prefix to dist folder
 IF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
